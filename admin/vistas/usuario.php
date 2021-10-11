@@ -91,10 +91,6 @@ require 'header.php';
       <input class="form-control" type="text" name="codigo_persona" id="codigo_persona" maxlength="64" placeholder="Clave">
     </div>
     <div class="form-group col-lg-6 col-md-6 col-xs-12">
-      <label for="">Dias libres pagos(*):</label>
-      <input class="form-control" type="number" name="dlpagos" id="dlpagos" maxlength="100" placeholder="Apellidos" required>
-    </div>
-    <div class="form-group col-lg-6 col-md-6 col-xs-12">
       <label for="">Pago diario(*):</label>
       <input class="form-control" type="number" name="pdiario" id="pdiario" maxlength="100" placeholder="Apellidos" required>
     </div>
