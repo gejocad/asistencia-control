@@ -49,6 +49,7 @@ require 'header.php';
       <th>Fecha</th>
       <th>Nombres</th>
       <th>Asistencia</th>
+      <th>Asistencia</th>
       <th>Fecha/Hora</th>
       <th>Código</th>
     </thead>
@@ -57,6 +58,7 @@ require 'header.php';
     <tfoot>
       <th>Fecha</th>
       <th>Nombres</th>
+      <th>Asistencia</th>
       <th>Asistencia</th>
       <th>Fecha/Hora</th>
       <th>Código</th>

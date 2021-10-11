@@ -29,13 +29,6 @@ public function registrar_entrada($codigo_persona,$dlpagos,$pdiario,$tipo){
 	return ejecutarConsulta($sql);
 }
 
-public function registrar_salida($codigo_persona,$dlpagos,$pdiario,$tipo){
-	date_default_timezone_set('America/Bogota');
-	$fecha = date("Y-m-d");
-	$hora = date("H:i:s");
- 	$sql = "INSERT INTO asistencia (codigo_persona, dlpagos, pdiario,  tipo, fecha) VALUES ('$codigo_persona','$dlpagos','$pdiario', '$tipo', '$fecha')";
-    return ejecutarConsulta($sql);
-}
 
 
 

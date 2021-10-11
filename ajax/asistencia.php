@@ -5,7 +5,8 @@ $asistencia=new Asistencia();
 
 $codigo_persona=isset($_POST["codigo_persona"])? limpiarCadena($_POST["codigo_persona"]):"";
 $iddepartamento=isset($_POST["iddepartamento"])? limpiarCadena($_POST["iddepartamento"]):"";
-
+$pdiario=isset($_POST["pdiario"])? limpiarCadena($_POST["pdiario"]):"";
+$dlpagos=isset($_POST["dlpagos"])? limpiarCadena($_POST["dlpagos"]):"";
 
 
 switch ($_GET["op"]) {
@@ -20,21 +21,14 @@ switch ($_GET["op"]) {
 			$result2=$asistencia->seleccionarcodigo_persona($codigo_persona);
      		$count2 = mysqli_num_rows($result2);
 			   
-     		$par = abs($count2%2); 
 
-          if ($par == 0){ 
-                              
-                $tipo = "Entrada";
-        		$rspta=$asistencia->registrar_entrada($codigo_persona,$tipo);
-    			//$movimiento = 0;
-    			echo $rspta ? '<h3><strong>Nombres: </strong> '. $result['nombre'].' '.$result['apellidos'].'</h3><div class="alert alert-success"> Ingreso registrado '.$hora.'</div>' : 'No se pudo registrar el ingreso';
-   		  }else{ 
-                $tipo = "Entrada";
-         		$rspta=$asistencia->registrar_entrada($codigo_persona,$tipo);
-     			//$movimiento = 1;
-     			echo $rspta ? '<h3><strong>Nombres: </strong> '. $result['nombre'].' '.$result['apellidos'].'</h3><div class="alert alert-success"> Ingreso registrado '.$hora.'</div>' : 'No se pudo registrar el ingreso';             
-        } 
-        } else {
+         $tipo = "Entrada";
+			$rspta=$asistencia->registrar_entrada($codigo_persona,$dlpagos,$result['pdiario'],$tipo);
+			//$movimiento = 0;
+			echo $rspta ? '<h3><strong>Nombres: </strong> '. $result['nombre'].' '.$result['apellidos'].'</h3><div class="alert alert-success"> Ingreso registrado '.$hora.'</div>' : 'No se pudo registrar el ingreso';
+        
+		} else {
+
 		         echo '<div class="alert alert-danger">
                        <i class="icon fa fa-warning"></i> No hay empleado registrado con esa código...!
                          </div>';

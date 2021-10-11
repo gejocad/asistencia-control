@@ -6,6 +6,9 @@ $asistencia=new Asistencia();
 
 $codigo_persona=isset($_POST["codigo_persona"])? limpiarCadena($_POST["codigo_persona"]):"";
 $iddepartamento=isset($_POST["iddepartamento"])? limpiarCadena($_POST["iddepartamento"]):"";
+$pdiario=isset($_POST["pdiario"])? limpiarCadena($_POST["pdiario"]):"";
+$dlpagos=isset($_POST["dlpagos"])? limpiarCadena($_POST["dlpagos"]):"";
+
 
 
 
@@ -25,12 +28,12 @@ switch ($_GET["op"]) {
           if ($par == 0){ 
                               
                 $tipo = "Entrada";
-        		$rspta=$asistencia->registrar_entrada($codigo_persona,$tipo);
+        		$rspta=$asistencia->registrar_entrada($codigo_persona,$dlpagos,$pdiario,$tipo);
     			//$movimiento = 0;
     			echo $rspta ? '<h3><strong>Nombres: </strong> '. $result['nombre'].' '.$result['apellidos'].'</h3><div class="alert alert-success"> Ingreso registrado '.$hora.'</div>' : 'No se pudo registrar el ingreso';
    		  }else{ 
                 $tipo = "Salida";
-         		$rspta=$asistencia->registrar_salida($codigo_persona,$tipo);
+         		$rspta=$asistencia->registrar_salida($codigo_persona,$dlpagos,$pdiario,$tipo);
      			//$movimiento = 1;
      			echo $rspta ? '<h3><strong>Nombres: </strong> '. $result['nombre'].' '.$result['apellidos'].'</h3><div class="alert alert-danger"> Salida registrada '.$hora.'</div>' : 'No se pudo registrar la salida';             
         } 
@@ -120,7 +123,8 @@ switch ($_GET["op"]) {
 				"1"=>$reg->nombre,
 				"2"=>$reg->tipo,
 				"3"=>$reg->fecha_hora,
-				"4"=>$reg->codigo_persona
+				"4"=>$reg->pdiario,
+				"5"=>$reg->codigo_persona
 				);
 		}
 
@@ -146,8 +150,9 @@ switch ($_GET["op"]) {
 				"0"=>$reg->fecha,
 				"1"=>$reg->nombre,
 				"2"=>$reg->tipo,
-				"3"=>$reg->fecha_hora,
-				"4"=>$reg->codigo_persona
+				"3"=>$reg->pdiario,
+				"4"=>$reg->fecha_hora,
+				"5"=>$reg->codigo_persona
 				);
 		}
 

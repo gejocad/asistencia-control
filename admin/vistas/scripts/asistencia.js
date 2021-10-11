@@ -2,6 +2,7 @@ var tabla;
 
 //funcion que se ejecuta al inicio
 function init(){
+	listar_asistencia();
    listar();
       listaru();
 $("#formulario").on("submit",function(e){
@@ -91,7 +92,7 @@ var  fecha_inicio = $("#fecha_inicio").val();
  var fecha_fin = $("#fecha_fin").val();
  var idcliente = $("#idcliente").val();
 
-	tabla=$('#tbllistado_asistencia').dataTable({
+	tabla=$('#tbllistado_asistencia').DataTable({
 		"aProcessing": true,//activamos el procedimiento del datatable
 		"aServerSide": true,//paginacion y filrado realizados por el server
 		dom: 'Bfrtip',//definimos los elementos del control de la tabla
@@ -113,8 +114,21 @@ var  fecha_inicio = $("#fecha_inicio").val();
 		},
 		"bDestroy":true,
 		"iDisplayLength":10,//paginacion
-		"order":[[0,"desc"]]//ordenar (columna, orden)
-	}).DataTable();
+		"order":[[0,"desc"]],//ordenar (columna, orden)
+		"footerCallback": function () {
+        
+            total = this.api()
+                //.column(2)numero de columna a sumar
+                .column(4, {page: 'current'})//para sumar solo la pagina actual
+                .data()
+                .reduce(function (a, b) {
+                    return parseFloat(a) + parseFloat(b);
+                }, 0 );
+
+            $(this.api().column(4).footer()).html(total);
+            
+        }
+	});
 }
 function listar_asistenciau(){
 var  fecha_inicio = $("#fecha_inicio").val();
