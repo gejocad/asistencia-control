@@ -48,9 +48,9 @@ require 'header.php';
     <thead>
       <th>Fecha</th>
       <th>Nombres</th>
-      <th>Asistencia</th>
-      <th>Asistencia</th>
+      <th>Actividad</th>
       <th>Fecha/Hora</th>
+      <th>Monto</th>
       <th>Código</th>
     </thead>
     <tbody>
@@ -58,9 +58,9 @@ require 'header.php';
     <tfoot>
       <th>Fecha</th>
       <th>Nombres</th>
-      <th>Asistencia</th>
-      <th>Asistencia</th>
+      <th>Actividad</th>
       <th>Fecha/Hora</th>
+      <th>Monto</th>  
       <th>Código</th>
     </tfoot>   
   </table>

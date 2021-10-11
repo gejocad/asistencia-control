@@ -13,41 +13,21 @@ $("#formularioc").on("submit",function(c){
    })
 
    $("#imagenmuestra").hide();
-//mostramos los permisos
-$.post("../ajax/usuario.php?op=permisos&id=", function(r){
-	$("#permisos").html(r);
-});
+
 
    //cargamos los items al select departamento
-   $.post("../ajax/departamento.php?op=selectDepartamento", function(r){
-   	$("#iddepartamento").html(r);
-   	$('#iddepartamento').selectpicker('refresh'); 
-   });
-
-   //cargamos los items al select tipousuario
-   $.post("../ajax/tipousuario.php?op=selectTipousuario", function(r){
-   	$("#idtipousuario").html(r);
-   	$('#idtipousuario').selectpicker('refresh'); 
-   });
+   $.post("../ajax/asistencia.php?op=selectPersona", function(r){
+	$("#codigo_persona").html(r);
+	$('#codigo_persona').selectpicker('refresh');
+});
 
 }
 
 //funcion limpiar
 function limpiar(){
-	$("#nombre").val("");
-    $("#apellidos").val("");
-	$("#direccion").val("");
-	$("#iddepartamento").selectpicker('refresh');
-	$("#idtipousuario").selectpicker('refresh');
-	$("#email").val("");
-	$("#login").val("");
-	$("#clave").val("");
-	$("#codigo_persona").val("");
-	$("#dlpagos").val("");
-	$("#pdiario").val("");
-	$("#imagenmuestra").attr("src","");
-	$("#imagenactual").val("");
-	$("#idusuario").val("");
+	$("#idcliente").selectpicker('refresh');
+	$("#tipo").selectpicker('refresh');
+	$("#monto").val("");
 }
 
 //funcion mostrar formulario
@@ -68,12 +48,10 @@ function mostrarform_clave(flag){
 	limpiar();
 	if(flag){
 		$("#listadoregistros").hide();
-		$("#formulario_clave").show();
 		$("#btnGuardar_clave").prop("disabled",false);
 		$("#btnagregar").hide();
 	}else{
 		$("#listadoregistros").show();
-		$("#formulario_clave").hide();
 		$("#btnagregar").show();
 	}
 }
@@ -90,7 +68,7 @@ function cancelarform_clave(){
 }
 //funcion listar
 function listar(){
-	tabla=$('#tbllistado').dataTable({
+	tabla=$('#tbllistado').DataTable({
 		"aProcessing": true,//activamos el procedimiento del datatable
 		"aServerSide": true,//paginacion y filrado realizados por el server
 		dom: 'Bfrtip',//definimos los elementos del control de la tabla
@@ -102,7 +80,7 @@ function listar(){
 		],
 		"ajax":
 		{
-			url:'../ajax/usuario.php?op=listar',
+			url:'../ajax/asistencia.php?op=listar',
 			type: "get",
 			dataType : "json",
 			error:function(e){
@@ -111,8 +89,21 @@ function listar(){
 		},
 		"bDestroy":true,
 		"iDisplayLength":10,//paginacion
-		"order":[[0,"desc"]]//ordenar (columna, orden)
-	}).DataTable();
+		"order":[[0,"desc"]],//ordenar (columna, orden)
+		"footerCallback": function () {
+        
+            total = this.api()
+                //.column(2)numero de columna a sumar
+                .column(6, {page: 'current'})//para sumar solo la pagina actual
+                .data()
+                .reduce(function (a, b) {
+                    return parseInt(a) + parseInt(b);
+                }, 0 );
+
+            $(this.api().column(6).footer()).html(total);
+            
+        }
+	});
 }
 //funcion para guardaryeditar
 function guardaryeditar(e){
@@ -121,7 +112,7 @@ function guardaryeditar(e){
      var formData=new FormData($("#formulario")[0]);
 
      $.ajax({
-     	url: "../ajax/usuario.php?op=guardaryeditar",
+     	url: "../ajax/adelanto.php?op=guardaryeditar",
      	type: "POST",
      	data: formData,
      	contentType: false,

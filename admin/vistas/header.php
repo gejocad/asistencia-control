@@ -166,8 +166,8 @@ if (strlen(session_id())<1)
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="asistencia.php"><i class="fa fa-circle-o"></i> Asistencia</a></li>
             <li><a href="rptasistencia.php"><i class="fa fa-circle-o"></i> Reportes</a></li>
+            <li><a href="adelanto.php"><i class="fa fa-circle-o"></i> Adelantos</a></li>
            
           </ul>
       </li>

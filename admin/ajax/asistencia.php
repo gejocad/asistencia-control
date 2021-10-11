@@ -67,7 +67,8 @@ switch ($_GET["op"]) {
 				"3"=>$reg->departamento,
 				"4"=>$reg->fecha_hora,
 				"5"=>$reg->tipo,
-				"6"=>$reg->fecha
+				"6"=>$reg->pdiario,
+				"7"=>$reg->fecha
 				);
 		}
 
@@ -172,7 +173,7 @@ switch ($_GET["op"]) {
 			$rspta=$usuario->listar();
 
 			while ($reg=$rspta->fetch_object()) {
-				echo '<option value=' . $reg->codigo_persona.'>'.$reg->nombre.' '.$reg->apellidos.'</option>';
+				echo '<option value='. $reg->codigo_persona.'>'.$reg->nombre.' '.$reg->apellidos.'</option>';
 			}
 			break;
 

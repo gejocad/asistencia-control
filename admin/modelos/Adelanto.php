@@ -1,7 +1,7 @@
 <?php 
 //incluir la conexion de base de datos
 require "../config/Conexion.php";
-class Usuario{
+class Asistencia{
 
 
 	//implementamos nuestro constructor
@@ -10,15 +10,17 @@ public function __construct(){
 }
 
 //metodo insertar regiustro
-public function insertar($nombre,$apellidos,$login,$iddepartamento,$idtipousuario,$email,$clavehash,$imagen,$usuariocreado,$codigo_persona,$dlpagos,$pdiario){
+public function insertar($codigo_persona,$pdiario,$tipo){
 	date_default_timezone_set('America/Bogota');
-	$fechacreado=date('Y-m-d H:i:s');
-	$sql="INSERT INTO usuarios (nombre,apellidos,login,iddepartamento,idtipousuario,email,password,imagen,estado,fechacreado,usuariocreado,codigo_persona,dlpagos,pdiario) VALUES ('$nombre','$apellidos','$login','$iddepartamento','$idtipousuario','$email','$clavehash','$imagen','1','$fechacreado','$usuariocreado','$codigo_persona','$dlpagos','$pdiario')";
+	$fecha = date("Y-m-d");
+	$hora = date("H:i:s");
+    $sql = "INSERT INTO asistencia (codigo_persona, pdiario, tipo, fecha) VALUES ('$codigo_persona','$pdiario', '$tipo', '$fecha')";
 	return ejecutarConsulta($sql);
-
 }
 
-public function editar($idusuario,$nombre,$apellidos,$login,$iddepartamento,$idtipousuario,$email,$imagen,$usuariocreado,$codigo_persona,$dlpagos,$pdiario){
+
+
+public function editar($idasistencia,$idcliente,$tipo,$pdiario){
 	$sql="UPDATE usuarios SET nombre='$nombre',apellidos='$apellidos',login='$login',iddepartamento='$iddepartamento',idtipousuario='$idtipousuario',email='$email',imagen='$imagen' ,usuariocreado='$usuariocreado',codigo_persona='$codigo_persona',dlpagos='$dlpagos',pdiario='$pdiario'    
 	WHERE idusuario='$idusuario'";
 	 return ejecutarConsulta($sql);

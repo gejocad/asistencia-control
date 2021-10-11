@@ -122,7 +122,7 @@ var  fecha_inicio = $("#fecha_inicio").val();
                 .column(4, {page: 'current'})//para sumar solo la pagina actual
                 .data()
                 .reduce(function (a, b) {
-                    return parseFloat(a) + parseFloat(b);
+                    return parseInt(a) + parseInt(b);
                 }, 0 );
 
             $(this.api().column(4).footer()).html(total);
